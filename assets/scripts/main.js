@@ -13,12 +13,13 @@ let game = new Phaser.Game(config);
 
 //1) Allows you to preload files (95% of the time they are images) 
 function preload() {
-    this.load.image('octopus', '../assets/img/octopusRight.png');
+    this.load.image('octopus', 'assets/img/octopusRight.png');
 }
 
 
 //2) Initialize the game
 function create() {
+    this.add.image(100, 100, 'octopus');
 
 }
 
