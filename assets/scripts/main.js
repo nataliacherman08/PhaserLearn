@@ -4,6 +4,9 @@ let config = {
     height: 600,
     physics: {
         default: 'arcade',
+        arcade: {
+            gravity: { x: 200 }
+        },
     },
     scene: {
         preload: preload,
@@ -22,7 +25,7 @@ function preload() {
 
 //2) Initialize the game
 function create() {
-    this.add.image(100, 100, 'octopus');
+    this.physics.add.image(100, 100, 'octopus');
 
 }
 
