@@ -39,6 +39,9 @@ function create() {
 //3) Create all the logic of the game
 //(Example, when you press the right arrow, the character goes to the right)
 function update() {
+
+
+    //If the key is pressed "isDown", then the velocity interacts with gravity
     if (cursors.up.isDown) {
         octopus.setVelocity(0, -300);
     }
