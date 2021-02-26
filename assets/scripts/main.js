@@ -5,7 +5,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { x: 200 }
+            gravity: { y: 450 }
         },
     },
     scene: {
@@ -16,6 +16,7 @@ let config = {
 };
 
 let game = new Phaser.Game(config);
+let octopus;
 
 //1) Allows you to preload files (95% of the time they are images) 
 function preload() {
@@ -25,8 +26,8 @@ function preload() {
 
 //2) Initialize the game
 function create() {
-    this.physics.add.image(100, 100, 'octopus');
-
+    octopus = this.physics.add.image(100, 100, 'octopus');
+    octopus.body.collideWorldBounds = true;
 }
 
 
