@@ -40,8 +40,11 @@ function create() {
 //(Example, when you press the right arrow, the character goes to the right)
 function update() {
 
+    // Allows to stop the movement of the character
+    octopus.setVelocityX(0);
+    octopus.setVelocityY(0);
 
-    //If the key is pressed "isDown", then the velocity interacts with gravity
+    // If the key is pressed "isDown", then the velocity interacts with gravity
     if (cursors.up.isDown) {
         octopus.setVelocity(0, -300);
     }
