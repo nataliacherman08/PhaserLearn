@@ -27,6 +27,7 @@ function preload() {
 //2) Initialize the game
 function create() {
     octopus = this.physics.add.image(100, 100, 'octopus');
+    //produces a collision effect with the background
     octopus.body.collideWorldBounds = true;
 }
 
