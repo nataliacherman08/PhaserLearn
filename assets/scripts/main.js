@@ -1,11 +1,12 @@
 let config = {
     type: Phaser.AUTO,
-    width: 1500,
-    height: 700,
+    width: 810,
+    height: 640,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 0 }
+            gravity: { y: 300 },
+            debug: false
         },
     },
     scene: {
@@ -21,12 +22,16 @@ let cursors;
 
 //1) Allows you to preload files (95% of the time they are images) 
 function preload() {
-    this.load.image('octopus', 'assets/img/octopusRight.png');
+    this.load.image("forest", "assets/img/darkBg.png");
+    this.load.spritesheet("yellowRaincoat", "assets/img/yellowRaincoat.png", { frameWidth: 49, frameHeight: 60 });
 }
 
 
 //2) Initialize the game
 function create() {
+    this.add.image(405, 320, "forest");
+
+
     octopus = this.physics.add.image(100, 100, 'octopus');
     //produces a collision effect with the background
     octopus.body.collideWorldBounds = true;
