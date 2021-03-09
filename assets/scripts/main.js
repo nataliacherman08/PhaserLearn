@@ -60,8 +60,8 @@ function update() {
 
 
     // Allows to stop the movement of the character
-    /* octopus.setVelocityX(0);
-     octopus.setVelocityY(0);*/
+    /*yellowRaincoat.setVelocityX(0);
+    yellowRaincoat.setVelocityY(0);*/
 
     // If the key is pressed "isDown", then the velocity interacts with gravity
     if (cursors.up.isDown) {
