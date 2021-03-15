@@ -5,7 +5,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300, x: 0 }
+            gravity: { y: 400, x: 0 }
         },
     },
     scene: {
@@ -19,6 +19,10 @@ let game = new Phaser.Game(config);
 let platforms;
 let yellowRaincoat;
 let cursors;
+let stars;
+let score;
+let scoreText;
+let bombs;
 
 //1) Allows you to preload files (95% of the time they are images) 
 function preload() {
@@ -38,7 +42,9 @@ function create() {
     platforms = this.physics.add.staticGroup();
     platforms.create(50, 250, "ground");
     platforms.create(600, 400, "ground");
-    platforms.create(750, 220, "ground");
+    platforms.create(630, 220, "ground");
+    platforms.create(800, 110, "ground");
+    platforms.create(300, 110, "ground");
 
     platforms.create(600, 610, "ground").setScale(6).refreshBody();
 
@@ -51,8 +57,62 @@ function create() {
 
     //Cursors
     cursors = this.input.keyboard.createCursorKeys();
+
+    //Items
+    stars = this.physics.add.group({
+
+        key: "star",
+
+        repeat: 12,
+
+        setXY: { x: 12, y: 0, stepX: 70 }
+
+    });
+    this.physics.add.collider(stars, platforms);
+    this.physics.add.overlap(yellowRaincoat, stars, collectStar, null, this);
+
+    stars.children.iterate(function (child) {
+
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
+    });
+
+    //Score
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+
+    //Bombs
+    bombs = this.physics.add.group();
+    this.physics.add.collider(bombs, platforms);
 }
 
+
+//
+function collectStar(yellowRaincoat, star) {
+
+    star.disableBody(true, true);
+
+
+    if (stars.countActive(true) === 0) {
+
+        stars.children.iterate(child => {
+
+            child.enableBody(true, child.x, 0, true, true);
+        });
+    }
+
+    score += 10;
+    scoreText.setText("Score :" + score);
+
+    if (stars.countActive(true) === 0) {
+        var x = (yellowRaincoat.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+        var bomb = bombs.create(x, 16, 'bomb');
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.allowGravity = false;
+    }
+}
 
 //3) Create all the logic of the game
 //(Example, when you press the right arrow, the character goes to the right)
