@@ -20,6 +20,8 @@ let platforms;
 let yellowRaincoat;
 let cursors;
 let roses;
+let score = 0;
+let scoreText;
 
 //1) Allows you to preload files (95% of the time they are images) 
 function preload() {
@@ -87,6 +89,10 @@ function create() {
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
     });
+
+
+    //score
+    scoreText = this.add.text(16, 40, 'score: 0', { fontSize: '25px', fill: '#fff' });
 }
 
 
@@ -94,6 +100,9 @@ function create() {
 function collectRoses(yellowRaincoat, rose) {
 
     rose.disableBody(true, true);
+
+    score += 10;
+    scoreText.setText('Score: ' + score);
 
     if (roses.countActive(true) === 0) {
 
